@@ -182,10 +182,12 @@ class FileHandlers(object):
         #do work to generate folder path
         values = {'$Series':        series,
                   '$Publisher':     publisher,
+                  '$PublisherF':    publisher[0],
                   '$Imprint':       imprint,
                   '$Year':          self.comic['ComicYear'],
                   '$series':        series.lower(),
                   '$publisher':     publisher.lower(),
+                  '$publisherF':    publisher[0].lower(),
                   '$VolumeY':       'V' + self.comic['ComicYear'],
                   '$VolumeN':       comicVol.upper(),
                   '$Type':          booktype
@@ -484,7 +486,7 @@ class FileHandlers(object):
             unicodeissue = issuenum
 
             _, prettycomiss, _ = helpers.issue_number_parser(issuenum, issue_id = issueid)
-            
+
             logger.fdebug('Pretty Comic Issue is : ' + str(prettycomiss))
             if mylar.CONFIG.UNICODE_ISSUENUMBER:
                 logger.fdebug('Setting this to Unicode format as requested: %s' % prettycomiss)
@@ -589,7 +591,7 @@ class FileHandlers(object):
             filebad = [':', ',', '/', '?', '!', '\'', '\"', r'\*'] #in u_comicname or '/' in u_comicname or ',' in u_comicname or '?' in u_comicname:
             for dbd in filebad:
                 if dbd in seriesfilename:
-                    if any([dbd == '/', dbd == '*']): 
+                    if any([dbd == '/', dbd == '*']):
                         repthechar = '-'
                     else:
                         repthechar = ''

@@ -159,7 +159,7 @@
         </table>
         </div>
 
-	<div id="tabs-2">	
+	<div id="tabs-2">
         <table class="configtable" summary="Web Interface">
             <tr>
             	<td>
@@ -169,7 +169,7 @@
                                     <label>HTTP Host</label>
                                     <input type="text" name="http_host" id="http_host" value="${config['http_host']}" size="30">
                                     <small>e.g. localhost or 0.0.0.0</small>
-	            		</div> 
+	            		</div>
                                 <div class="row">
                                     <label>HTTP Port</label>
                                     <input type="text" name="http_port" id="http_port" value="${config['http_port']}" size="10">
@@ -243,7 +243,7 @@
 -->
                                  <legend>Interface</legend>
                                  <div class="row">
-                                  <label>Interface</label> 
+                                  <label>Interface</label>
                                     <select name="interface">
                                       %for interface in config['interface_list']:
                                           <%
@@ -275,7 +275,7 @@
                              </div>
             	</td>
 
-                <td>          
+                <td>
                          <fieldset>
                                 <legend>API</legend>
                                 <div class="row">
@@ -394,14 +394,14 @@
                                             <input type="text" name="chgroup" value="${config['chgroup']}" size="50">
                                             <small>Set Group Ownership of files/directories (name OR gid)</small>
                                         </div>
-                                    %endif 
+                                    %endif
                                 </div>
 	                </fieldset>
                 </td>
             </tr>
         </table>
 	</div>
-	
+
 	<div id="tabs-3">
         <table class="configtable" summary="Download Settings">
 	    <tr>
@@ -428,7 +428,7 @@
 	                   	<div class="row">
 		                    <label>SABnzbd Username</label>
 		                    <input type="text" name="sab_username" id="sab_username" value="${config['sab_user']}" size="20">
-    	                        </div>	               
+    	                        </div>
                                 <div class="row">
                                     <label>SABnzbd Password:</label>
                                     <input type="password" name="sab_password" id="sab_password" value="${config['sab_pass']| h}" size="20">
@@ -559,7 +559,7 @@
                                  <input type="button" value="Test NZBGet" id="test_nzbget" style="float:center" /></br>
                                  <input type="text" name="nzbgetstatus" style="text-align:center; font-size:11px;color:white;" id="nzbgetstatus" size="50" DISABLED />
                             </div>
-                         
+
                          </fieldset>
                          <fieldset id="blackhole_options">
                                     <div class="row">
@@ -570,7 +570,7 @@
                          </fieldset>
                          <fieldset id="none_options">
                          </fieldset>
-                          <fieldset id="general_nzb_options">           
+                          <fieldset id="general_nzb_options">
                             <div class="checkbox row">
                                 <label>Usenet Retention (in days)</label>
                                 <input type="text" name="usenet_retention" value="${config['usenet_retention']}" size="10">
@@ -597,7 +597,7 @@
                                             <input type="radio" name="torrent_downloader" id="torrent_downloader_deluge" value="4" ${config['torrent_downloader_deluge']}> Deluge&nbsp;&nbsp;
                                             <input type="radio" name="torrent_downloader" id="torrent_downloader_qbittorrent" value="5" ${config['torrent_downloader_qbittorrent']}> qBittorrent
                                           </center>
-                                
+
 			<fieldset id="watchlist_options">
                                 <div class="row checkbox left clearfix">
                                         <input id="local_watchdir" type="checkbox" name="torrent_local" value="1" ${config['torrent_local']} /><label>Local Watch dir</label>
@@ -960,12 +960,12 @@
                                                 <input id="enable_public" title="Use Public Torrents" type="checkbox" name="enable_public" value=1 ${config['enable_public']} /><label>Enable Public Torrent Search</label>
                                                 <div align="left">
                                                    <small class="heading"><span style="float: left; margin-left: .3em; margin-top: 4px;" class="ui-icon ui-icon-info"></span>Search: None / RSS: None</small>
-                                                </div>                                            
+                                                </div>
                                          </div>
                                          <div class="row checkbox left clearfix">
                                                 <input type="checkbox" id="enable_32p" onclick="initConfigCheckbox($(this));" name="enable_32p" value=1 ${config['enable_32p']} /><label>Enable 32P</label>
                                          </div>
-                                         <div class="config"> 
+                                         <div class="config">
                                              <fieldset>
                                                 <div align="center">
                                                     <input type="radio" name="mode_32p" id="legacymode_32p" value="0" ${config['legacymode_32p']}> Legacy Mode <input type="radio" name="mode_32p" id="authmode_32p" value="1" ${config['authmode_32p']}> Auth Mode
@@ -1028,7 +1028,7 @@
                                                         torznab_verify = "checked"
                                                     else:
                                                         torznab_verify = ""
- 
+
                                                     if torznab[5] == '1' or torznab[5] == 1:
                                                         torznab_enabled = "checked"
                                                     else:
@@ -1074,7 +1074,7 @@
                         </fieldset>
 
                 </td>
-        
+
                 <td>
                         <fieldset>
                                 <legend>Newznab</legend>
@@ -1309,7 +1309,7 @@
                                         <input type="text" name="extra_scripts" value="${config['extra_scripts']}" size="30">
                                         <small>enter in the absolute path to the script</small>
                                     </div>
-                                </div>                           
+                                </div>
                 	</fieldset>
                         <fieldset>
                                 <legend>Conversions</legend>
@@ -1407,7 +1407,7 @@
 	<div id="tabs-6">
         <table class="configtable" summary="Advanced Settings">
             <tr>
-                <td>                
+                <td>
                 	<fieldset>
                 		<legend>Renaming options</legend>
                                 <div class="row checkbox left clearfix">
@@ -1420,7 +1420,7 @@
                                      <label>Folder Format</label>
                                      <input type="text" name="folder_format" value="${config['folder_format']}" size="43">
                                      <%
-                                          folder_options = "$Series = SeriesName\n$Year = SeriesYear\n$VolumeY = V{SeriesYear}\n$VolumeN = V{Volume#}\n$Publisher = Publisher\n$Imprint = Publisher Imprint\n$Type = BookType (TPB/GN/HC/One-Shot/Digital)"
+                                        folder_options = "$Series = SeriesName\n$Year = SeriesYear\n$VolumeY = V{SeriesYear}\n$VolumeN = V{Volume#}\n$Publisher = Publisher\n$PublisherF = Publisher's first letter\n$PublisherF = Publisher First Letter\n$Imprint = Publisher Imprint\n$Type = BookType (TPB/GN/HC/One-Shot/Digital)"
                                      %>
                                      <a href="#" title="${folder_options}"><img src="images/info32.png" height="16" alt="" /></a>
                                      <small>Use: $Publisher, $Series, $Year<br />
@@ -1442,7 +1442,7 @@
                                     <small>if tag isn't available, won't create it</small>
                                  </div>
                       </fieldset>
-                	
+
     				<fieldset>
     					<legend>Advanced Options</legend>
                                 <div class="row checkbox">
@@ -1486,10 +1486,10 @@
                                 </div>
 
     				</fieldset>
-    				
+
 				</td>
 				<td>
-					
+
 		        	<fieldset>
 		        		<legend>Miscellaneous</legend>
                                         <div class="row checkbox left clearfix">
@@ -1572,7 +1572,7 @@
                                  <input type="text" name="pushoverstatus" style="text-align:center; font-size:11px;" id="pushoverstatus" size="55" DISABLED />
                             </div>
                         </div>
-                     </fieldset>            
+                     </fieldset>
 
                      <fieldset>
                         <h3><img src="images/boxcar_logo.png" style="vertical-align: middle; margin: 3px; margin-top: -1px;" height="30" width="30"/>Boxcar.IO</h3>
@@ -1790,7 +1790,7 @@
 	       </td>
              </tr>
         </table>
-    </div>	
+    </div>
         <input type="button" value="Save Changes" onclick="doAjaxCall('configUpdate',$(this),'tabs',true,'post');return false;" data-success="Changes saved successfully">
         <div class="message">
         	<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>Web Interface changes require a restart to take effect</p>
@@ -2034,7 +2034,7 @@
         <script>
             function pathIsParentOf(path, childPath) {
                 if (path == 'None' || childPath == 'None') { return false;}
-                
+
                 // Restore trailing slashes
                 if (path.slice(-1) != "\${sep}") {
                     path = path + "\${sep}";
@@ -2056,7 +2056,7 @@
                 if (childPath.startsWith(path)) {
                     // Check that if they have a common parent, they are not different paths with a common substring
                     re = new RegExp("\\\${sep}[^\\\\${sep}]*$", flags);
-                    pathParent = path.replace(re, "");                    
+                    pathParent = path.replace(re, "");
                     childPathParent = childPath.replace(re, "");
 
                     if (pathParent == childPathParent) {
@@ -2064,7 +2064,7 @@
                         return false;
                     } else {
                         return true;
-                    }                
+                    }
                 } else {
                     return false;
                 }
@@ -2725,7 +2725,7 @@ $("#enable_airdcpp").click(function(){
                         {
                                 $("#utorrent_options,#rtorrent_options,#watchlist_options,#transmission_options,#qbittorrent_options").hide();
                                 $("#deluge_options").show();
-                        } 
+                        }
                 if ($("#torrent_downloader_qbittorrent").is(":checked"))
                         {
                                 $("#utorrent_options,#rtorrent_options,#watchlist_options,#transmission_options,#deluge_options").hide();
@@ -3374,7 +3374,7 @@ $("#enable_airdcpp").click(function(){
                     else {
                         $('#check_folder_warning').css("display", "none");
                     }
-                
+
                 };
 
                 checkCheckFolder($('input[name="check_folder"]').val());
