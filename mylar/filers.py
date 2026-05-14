@@ -18,8 +18,6 @@
 import re
 import os
 import pathlib
-import json
-import shutil
 import calendar
 import datetime
 import time
