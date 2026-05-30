@@ -1,30 +1,28 @@
 FROM python:3.11-alpine3.23
 
-# set version label
-ARG MYLAR_COMMIT=v0.3.0
-ARG ORG=MylarComics
-#LABEL version=${BASE_VERSION}_${MYLAR_COMMIT}
+ARG BUILD_COMMIT=unknown
+LABEL org.opencontainers.image.revision=$BUILD_COMMIT
 
 RUN \
 echo "**** install system packages ****" && \
  apk add --no-cache \
- git=2.24.3-r0 \
- # cfscrape dependecies
- nodejs=12.15.0-r1 \
+ git \
+ # cfscrape dependencies
+ nodejs \
  # unrar-cffi & Pillow dependencies
- build-base=0.5-r1 \
+ build-base \
  # unar-cffi dependencies
- libffi-dev=3.2.1-r6 \
+ libffi-dev \
  # Pillow dependencies
- zlib-dev=1.2.11-r3 \
- jpeg-dev=8-r6
+ zlib-dev \
+ jpeg-dev
 
 # It might be better to check out release tags than nightly HEAD.
 # For development work I reccomend mounting a full git repo from the
 # docker host over /app/mylar.
 RUN echo "**** install app ****" && \
  git config --global advice.detachedHead false && \
- git clone https://github.com/${ORG}/mylar3.git --depth 1 --branch ${MYLAR_COMMIT} --single-branch /app/mylar
+ git clone https://github.com/DLBPointon/mylar3.git --depth 1 --branch token_update --single-branch /app/mylar
 
 RUN echo "**** install requirements ****" && \
  pip3 install --no-cache-dir -U -r /app/mylar/requirements.txt && \

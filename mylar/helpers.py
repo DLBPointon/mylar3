@@ -224,18 +224,27 @@ def replace_and_format_all(settings_text, key_dict):
     for key, value in key_dict.items():
         regex = f"\$({key})(\[(\d.*)?-(\d.*)?\])?"
         regex_out = re.search(regex, settings_text)
+        logger.info(f"regex: {regex}")
+        logger.info(f"regex_out: {regex_out}")
         if regex_out:
             key = regex_out.group(1)
+            logger.info(f"key: {key}")
             if value is not None:
+                logger.info(f"value: {value}")
                 tmp_text = str(value)
+                logger.info(f"tmp_text: {tmp_text}")
                 format_block = regex_out.group(2)
                 if format_block is not None:
+                    # For locations inside the [ ] block
                     start_index = regex_out.group(3) if regex_out.group(3) else 0
-
+                    logger.info(f"start_index: {start_index}")
                     end_index = (regex_out.group(4) if start_index == None else ( len(tmp_text) if end_index > len(tmp_text) else end_index))
+                    logger.info(f"end_index: {end_index}")
 
                     tmp_text = tmp_text[int(start_index):int(end_index)]
+                    logger.info(f"tmp_text: {tmp_text}")
                 settings_text = settings_text.replace(regex_out.group(0), tmp_text)
+                logger.info(f"settings_text: {settings_text}")
         else:
             settings_text = settings_text.replace(key, value)
     return settings_text
