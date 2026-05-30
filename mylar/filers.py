@@ -211,6 +211,7 @@ class FileHandlers(object):
                     bb.append(dlc.parts[i])
                     i+=1
             bb_tuple = pathlib.PurePath(os.path.sep.join(bb))
+
             try:
                 com_base = pathlib.PurePath(dlc).relative_to(ddir)
             except ValueError as e:

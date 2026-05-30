@@ -215,8 +215,35 @@ def human2bytes(s):
     else:
         return 0
 
+def replace_and_format_all(settings_text, key_dict):
+    """
+    Replaces $Strings in the settings text with their real value (in the key_dict),
+    if that $String also has a formatter (e.g. [int-int] or [int]) then the value
+    should then also be subset by that index.
+    """
+    for key, value in key_dict.items():
+        regex = f"\$({key})(\[(\d.*)?-(\d.*)?\])?"
+        regex_out = re.search(regex, settings_text)
+        if regex_out:
+            key = regex_out.group(1)
+            if value is not None:
+                tmp_text = str(value)
+                format_block = regex_out.group(2)
+                if format_block is not None:
+                    start_index = regex_out.group(3) if regex_out.group(3) else 0
+
+                    end_index = (regex_out.group(4) if start_index == None else ( len(tmp_text) if end_index > len(tmp_text) else end_index))
+
+                    tmp_text = tmp_text[int(start_index):int(end_index)]
+                settings_text = settings_text.replace(regex_out.group(0), tmp_text)
+        else:
+            settings_text = settings_text.replace(key, value)
+    return settings_text
+
 def replace_all(text, dic):
     for i, j in dic.items():
+        # Can this be simply updated to check for [ ] and
+        # do string manipulation instead of replace where it makes sense
         if all([j != 'None', j is not None]):
             text = text.replace(i, j)
     return text.rstrip()
@@ -414,9 +441,9 @@ def rename_param(comicid, comicname, issue, ofilename, comicyear=None, issueid=N
                 comversion = comicnzb['ComicVersion']
 
             unicodeissue = issuenum
-            
+
             prettycomiss = issue_number_parser(issuenum, issue_id=issueid, pretty_string = True).asString
-            
+
             logger.fdebug('Pretty Comic Issue is : ' + str(prettycomiss))
             if mylar.CONFIG.UNICODE_ISSUENUMBER:
                 logger.fdebug('Setting this to Unicode format as requested: %s' % prettycomiss)
@@ -506,7 +533,7 @@ def rename_param(comicid, comicname, issue, ofilename, comicyear=None, issueid=N
             filebad = [':', ',', '/', '?', '!', '\'', '\"', r'\*'] #in u_comicname or '/' in u_comicname or ',' in u_comicname or '?' in u_comicname:
             for dbd in filebad:
                 if dbd in seriesfilename:
-                    if any([dbd == '/', dbd == '*']): 
+                    if any([dbd == '/', dbd == '*']):
                         repthechar = '-'
                     else:
                         repthechar = ''
@@ -985,7 +1012,7 @@ def upgrade_dynamic():
         for ds in dynamic_storylist:
             CtrlVal = {"IssueArcID": ds['IssueArcID']}
             newVal = {"DynamicComicName": ds['DynamicComicName']}
-            myDB.upsert("storyarcs", newVal, CtrlVal)   
+            myDB.upsert("storyarcs", newVal, CtrlVal)
 
     logger.info('Finished updating ' + str(len(dynamic_comiclist)) + ' / ' + str(len(dynamic_storylist)) + ' entries within the db.')
     mylar.CONFIG.DYNAMIC_UPDATE = 4
@@ -2599,7 +2626,7 @@ def torrentinfo(issueid=None, torrent_hash=None, download=False, monitor=False):
             torrent_folder = torrent_info['folder']
 
         if all([torrent_status is True, download is True]):
-            if not issueid: 
+            if not issueid:
                 torrent_info['snatch_status'] = 'MONITOR STARTING'
                 #yield torrent_info
 
@@ -4412,7 +4439,7 @@ def issue_number_parser(issue_no, zero_padding=None, issue_id= None, from_data_s
     except:
         if issue_no is None:
             return IssueNumber(999999999999999,'999999999999999')
-        
+
         try:
             test_issue_no = str(issue_no)
             if test_issue_no.isdigit():
@@ -4502,7 +4529,7 @@ def issue_number_parser(issue_no, zero_padding=None, issue_id= None, from_data_s
     else:
         numeric_part = numeric_parts[0]
         match_position = issue_no.find(numeric_part)
-        # The filechecker has to operate on a l-r basis to avoid picking part of the volume as the issue number.  It also will remove full-stops, 
+        # The filechecker has to operate on a l-r basis to avoid picking part of the volume as the issue number.  It also will remove full-stops,
         # and spaces when processing so we need to remove these from the int calculation to ensure comparisons.  The calculation itself is case insensitive
         prefix = issue_no[:match_position]
         suffix = issue_no[match_position + len(numeric_part):]
